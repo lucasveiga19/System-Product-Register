@@ -1,8 +1,11 @@
+import Entities.ImportedProduct;
 import Entities.Product;
+import Entities.UsedProduct;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,8 +28,17 @@ public class Program {
             String name = input.nextLine();
             System.out.print("Price: ");
             double price = input.nextDouble();
-            System.out.print("Customs fee: ");
-            System.out.print("Manufacture date (DD/MM/YYYY): ");
+            if (ch == 'i'){
+                System.out.print("Customs fee: ");
+                double customsFee = input.nextDouble();
+                list.add(new ImportedProduct(name, price, customsFee));
+            } else if (ch == 'u'){
+                System.out.print("Manufacture date (DD/MM/YYYY): ");
+                Date manufactureDate = sdf.parse(input.next());
+                list.add(new UsedProduct(name, price, manufactureDate));
+            } else {
+                list.add(new Product(name, price));
+            }
         }
 
         System.out.println();
